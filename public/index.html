@@ -8,16 +8,61 @@
     <link rel="icon" href="./assets/logo.png" />
   </head>
   <body>
-    <button id="login-btn">Log in with GitHub</button>
-    <button id="fetch-btn">Fetch Repos</button>
-    <button id="send-btn">Send</button>
-    <label for="myDropdown">Choose an option:</label>
-    <select id="myDropdown" name="myOption">
-      <option value="1">Short Answer</option>
-      <option value="2">Long Answer</option>
-    </select>
-    <div id="loader"></div>
-    <div id="repos"></div>
+    <header>
+      <nav>
+        <img src="assets/logo.png" alt="logo" class="logo" />
+        <button class="login-btn" id="login-btn">
+          Log in with
+          <img src="assets/git.png" alt="GitHub" />
+        </button>
+      </nav>
+      <div class="hero">
+        <h1 id="headline"></h1>
+        <p>
+          Discover your next big idea.
+          <strong>GIG (GitHub Idea Generator)</strong>
+          analyzes your GitHub repositories to understand your coding style,
+          interests, and skills — then recommends fresh, personalized project
+          ideas to help you grow and create.
+        </p>
+      </div>
+    </header>
+    <br />
+    <h2 style="margin-left: 1%; color: #111111">Your repositories:</h2>
+    <div id="main">
+      <div id="sub-main">
+        <div id="repos">
+          <h2 style="text-align: center; color: #e5e4e2; width: 100%">
+            Please log in to load your repositories...
+          </h2>
+          <div id="loader1" class="loader" style="align-self: center"></div>
+        </div>
+        <div id="div2">
+          <div id="length-div">
+            <label for="length-select" id="length-label"
+              >Choose an answer length:</label
+            >
+            <select id="length-select" name="myOption">
+              <option value="1">Short Answer</option>
+              <option value="2">Long Answer</option>
+            </select>
+          </div>
+          <button id="send-btn" href="#output">Get Ideas!</button>
+          <p style="text-align: center; width: 50%">
+            <span style="font-weight: bold">P.S.</span> Having a README and
+            description for each of your repositories will help the AI give
+            better ideas related to you!
+          </p>
+        </div>
+      </div>
+      <br />
+      <h2 style="margin-left: 1%; color: #111111">New project ideas:</h2>
+      <div id="output">
+        <div id="loader2" class="loader" style="align-self: center"></div>
+      </div>
+    </div>
+    <br />
+    <footer><p>© 2025 Cory Pearl. All rights reserved.</p></footer>
+    <script src="script.js"></script>
   </body>
-  <script src="script.js"></script>
 </html>
