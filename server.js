@@ -4,6 +4,19 @@ const path = require('path');
 const session = require('express-session');
 const axios = require('axios');
 const gemini = require('./server-assets/ai-req.js');
+const os = require('os');
+
+const networkInterfaces = os.networkInterfaces();
+var ip;
+
+for (const name of Object.keys(networkInterfaces)) {
+  for (const net of networkInterfaces[name]) {
+    if (net.family === 'IPv4' && !net.internal) {
+      console.log(`Your IPv4 address is: ${net.address}`);
+      ip = net.address;
+    }
+  }
+}
 
 const app = express();
 const PORT = 3000;
@@ -17,8 +30,6 @@ app.use(
     saveUninitialized: true,
   })
 );
-
-// --- Routes ---
 
 // Homepage
 app.get('/', (req, res) => {
