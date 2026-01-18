@@ -64,17 +64,60 @@ Refer to the [Google Gen AI JavaScript SDK documentation](https://googleapis.git
 
 ## Configuration Options
 
-Configuration options are currently not explicitly defined. Further information will be available as the project evolves. However, using Google GenAI usually requires an API key. Set this key as an environment variable or directly within the code during initialization. Example setting the API key as an environment variable:
+### Environment Variables
+
+This project requires several environment variables to be set. Create a `.env` file in the `server-assets/` directory with the following variables:
+
+#### GitHub OAuth Setup
+
+1. **Create a GitHub OAuth App:**
+   - Go to GitHub Settings → Developer settings → OAuth Apps → New OAuth App
+   - Fill in the application details:
+     - **Application name:** Your app name (e.g., "GIG Project Recommender")
+     - **Homepage URL:** `http://localhost:3000` (or your preferred URL)
+     - **Authorization callback URL:** `http://YOUR_IP_ADDRESS:3000/callback`
+       - Replace `YOUR_IP_ADDRESS` with your local machine's IP address
+       - To find your IP address, run `ifconfig` (Mac/Linux) or `ipconfig` (Windows) and look for your IPv4 address
+       - **Note:** The callback URL must match exactly what the server uses. The server automatically detects your IP and constructs the callback URL as `http://${YOUR_IP}:3000/callback`
+   - Click "Register application"
+
+2. **Get your GitHub OAuth credentials:**
+   - After creating the OAuth app, you'll receive a **Client ID** and **Client Secret**
+   - Copy these values - you'll need them for your `.env` file
+
+3. **Required GitHub Environment Variables:**
+   ```bash
+   GITHUB_CLIENT_ID=your_github_client_id_here
+   GITHUB_CLIENT_SECRET=your_github_client_secret_here
+   SESSION_SECRET=your_random_session_secret_here
+   ```
+   - `GITHUB_CLIENT_ID`: The Client ID from your GitHub OAuth App
+   - `GITHUB_CLIENT_SECRET`: The Client Secret from your GitHub OAuth App
+   - `SESSION_SECRET`: A random string used to encrypt sessions (can be any secure random string)
+
+#### Google Gemini API Setup
+
+You'll also need a Google Gemini API key:
 
 ```bash
-export GOOGLE_API_KEY=YOUR_API_KEY
+GEMINI_API_KEY=your_gemini_api_key_here
 ```
 
-Then in your code:
+**Example `.env` file structure:**
 
-```javascript
-const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
+Create `server-assets/.env` with:
 ```
+GITHUB_CLIENT_ID=abc123def456ghi789
+GITHUB_CLIENT_SECRET=xyz789uvw456rst123
+SESSION_SECRET=my-super-secret-session-key-12345
+GEMINI_API_KEY=your-gemini-api-key-here
+```
+
+**Important Notes:**
+- Never commit your `.env` file to version control
+- The callback URL in your GitHub OAuth app must match: `http://YOUR_IP_ADDRESS:3000/callback`
+- If your IP address changes, you'll need to update the callback URL in your GitHub OAuth app settings
+- The server runs on port 3000 by default and will display your detected IP address in the console when it starts
 
 ## Contributing Guidelines
 
